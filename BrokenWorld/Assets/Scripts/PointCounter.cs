@@ -16,12 +16,15 @@ public class PointCounter : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
-		// If the next update is reached
-		if (Time.time >= nextUpdate)
+		if (!GameObject.Find("PlayButton").GetComponent<ButtonControler>().Paused && !GameObject.Find("PlayButton").GetComponent<ButtonControler>().Over)
 		{
-			nextUpdate = Mathf.FloorToInt(Time.time) + 1;
-			GameObject.Find("Score").GetComponent<Text>().text = (nextUpdate - 1).ToString();
+			if (Time.time >= nextUpdate)
+			{
+				nextUpdate = Mathf.FloorToInt(Time.time) + 1;
+				int score = int.Parse(GameObject.Find("Score").GetComponent<Text>().text);
+				score += 1;
+				GameObject.Find("Score").GetComponent<Text>().text = (score).ToString();
+			}
 		}
 
 	}
