@@ -16,6 +16,9 @@ public class BgSpeed : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bgRend.material.mainTextureOffset += new Vector2(bgSpeed * Time.deltaTime, 0f);   
+		if (!GameObject.Find("PlayButton").GetComponent<ButtonControler>().Paused && !GameObject.Find("PlayButton").GetComponent<ButtonControler>().Over)
+		{
+			bgRend.material.mainTextureOffset += new Vector2(bgSpeed * Time.deltaTime, 0f);
+		}
     }
 }

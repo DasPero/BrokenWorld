@@ -8,8 +8,29 @@ using System;
 public class ButtonControler : MonoBehaviour
 {
 
+	public bool Paused;
+	public bool Over;
+
 	public void Start()
 	{
+
+		Paused = false;
+		Over = false;
+
+		try
+		{
+			GameObject.Find("game_paused").GetComponent<SpriteRenderer>().enabled = false;
+			GameObject.Find("game_over").GetComponent<SpriteRenderer>().enabled = false;
+
+			GameObject.Find("HomeButton").GetComponentInChildren<CanvasRenderer>().SetAlpha(0);
+			GameObject.Find("RestartButton").GetComponentInChildren<CanvasRenderer>().SetAlpha(0);
+			GameObject.Find("PlayButton").GetComponentInChildren<CanvasRenderer>().SetAlpha(0);
+			GameObject.Find("HomeButton").GetComponent<Button>().interactable = false;
+			GameObject.Find("RestartButton").GetComponent<Button>().interactable = false;
+			GameObject.Find("PlayButton").GetComponent<Button>().interactable = false;
+		}
+		catch (NullReferenceException e) { }
+
 		try
 		{
 			Slider effects = GameObject.Find("EffectSlider").GetComponent<Slider>();
@@ -21,7 +42,7 @@ public class ButtonControler : MonoBehaviour
 
 	}
 
-    public void ExitHover()
+	public void ExitHover()
 	{
 		FindObjectOfType<AudioManager>().PlayOnce("button_hover");
 	}
@@ -30,11 +51,11 @@ public class ButtonControler : MonoBehaviour
 	{
 		FindObjectOfType<AudioManager>().PlayOnce("button_click");
 
-	#if UNITY_EDITOR
+#if UNITY_EDITOR
 				 UnityEditor.EditorApplication.isPlaying = false;
-	#else
+#else
 		Application.Quit();
-	#endif
+#endif
 
 	}
 
@@ -66,13 +87,36 @@ public class ButtonControler : MonoBehaviour
 
 	public void HomeHover()
 	{
-		FindObjectOfType<AudioManager>().PlayOnce("button_hover");
+		if (SceneManager.GetActiveScene().name == "Settings")
+		{
+			FindObjectOfType<AudioManager>().PlayOnce("button_hover");
+		}
+		else
+		{
+			if (GameObject.Find("HomeButton").GetComponent<Button>().interactable)
+			{
+				FindObjectOfType<AudioManager>().PlayOnce("button_hover");
+			}
+		}
 	}
 
 	public void HomeClick()
 	{
-		FindObjectOfType<AudioManager>().PlayOnce("button_click");
-		SceneManager.LoadScene("Main Menu");
+		if (SceneManager.GetActiveScene().name == "Settings")
+		{
+			FindObjectOfType<AudioManager>().PlayOnce("button_click");
+			SceneManager.LoadScene("Main Menu");
+		}
+		else
+		{
+			if (GameObject.Find("HomeButton").GetComponent<Button>().interactable)
+			{
+				FindObjectOfType<AudioManager>().PlayOnce("button_click");
+				FindObjectOfType<AudioManager>().Stop("ingame");
+				FindObjectOfType<AudioManager>().Play("menu");
+				SceneManager.LoadScene("Main Menu");
+			}
+		}
 	}
 
 	public void SetMusicVolume()
@@ -85,5 +129,106 @@ public class ButtonControler : MonoBehaviour
 	{
 		Slider effects = GameObject.Find("EffectSlider").GetComponent<Slider>();
 		FindObjectOfType<AudioManager>().EffectVolume(effects.value);
+	}
+
+	public void PauseHover()
+	{
+		if (!GameObject.Find("PlayButton").GetComponent<ButtonControler>().Over)
+		{
+			FindObjectOfType<AudioManager>().PlayOnce("button_hover");
+		}
+	}
+
+	public void PauseClick()
+	{
+		if (!GameObject.Find("PlayButton").GetComponent<ButtonControler>().Over)
+		{
+			FindObjectOfType<AudioManager>().PlayOnce("button_click");
+			FindObjectOfType<AudioManager>().Pause("ingame");
+
+			GameObject.Find("frame_0_delay-0.17s").GetComponent<Animator>().enabled = false;
+
+			GameObject.Find("game_paused").GetComponent<SpriteRenderer>().enabled = true;
+
+			GameObject.Find("HomeButton").GetComponentInChildren<CanvasRenderer>().SetAlpha(1);
+			GameObject.Find("RestartButton").GetComponentInChildren<CanvasRenderer>().SetAlpha(1);
+			GameObject.Find("PlayButton").GetComponentInChildren<CanvasRenderer>().SetAlpha(1);
+			GameObject.Find("HomeButton").GetComponent<Button>().interactable = true;
+			GameObject.Find("RestartButton").GetComponent<Button>().interactable = true;
+			GameObject.Find("PlayButton").GetComponent<Button>().interactable = true;
+
+			GameObject.Find("PlayButton").GetComponent<ButtonControler>().Paused = true;
+		}
+	}
+
+	public void RestartHover()
+	{
+		if (GameObject.Find("RestartButton").GetComponent<Button>().interactable)
+		{
+			FindObjectOfType<AudioManager>().PlayOnce("button_hover");
+		}
+	}
+
+	public void RestartClick()
+	{
+		if (GameObject.Find("RestartButton").GetComponent<Button>().interactable)
+		{
+			FindObjectOfType<AudioManager>().PlayOnce("button_click");
+
+			FindObjectOfType<AudioManager>().Stop("ingame");
+			FindObjectOfType<AudioManager>().Play("ingame");
+
+			SceneManager.LoadScene("SampleScene");
+		}
+	}
+
+	public void SmallPlayHover()
+	{
+		if (GameObject.Find("PlayButton").GetComponent<Button>().interactable)
+		{
+			FindObjectOfType<AudioManager>().PlayOnce("button_hover");
+		}
+	}
+
+	public void SmallPlayClick()
+	{
+		if (GameObject.Find("PlayButton").GetComponent<Button>().interactable)
+		{
+			FindObjectOfType<AudioManager>().PlayOnce("button_click");
+			if (GameObject.Find("PlayButton").GetComponent<ButtonControler>().Paused)
+			{
+				Paused = false;
+				GameObject.Find("frame_0_delay-0.17s").GetComponent<Animator>().enabled = true;
+				FindObjectOfType<AudioManager>().Play("ingame");
+				GameObject.Find("game_paused").GetComponent<SpriteRenderer>().enabled = false;
+				GameObject.Find("HomeButton").GetComponentInChildren<CanvasRenderer>().SetAlpha(0);
+				GameObject.Find("RestartButton").GetComponentInChildren<CanvasRenderer>().SetAlpha(0);
+				GameObject.Find("PlayButton").GetComponentInChildren<CanvasRenderer>().SetAlpha(0);
+				GameObject.Find("HomeButton").GetComponent<Button>().interactable = false;
+				GameObject.Find("RestartButton").GetComponent<Button>().interactable = false;
+				GameObject.Find("PlayButton").GetComponent<Button>().interactable = false;
+			}
+
+			if (GameObject.Find("PlayButton").GetComponent<ButtonControler>().Over)
+			{
+				FindObjectOfType<AudioManager>().Play("ingame");
+				GameObject.Find("PlayButton").GetComponent<ButtonControler>().RestartClick();
+				GameObject.Find("frame_0_delay-0.17s").GetComponent<Animator>().enabled = true;
+			}
+		}
+	}
+
+	public void GameOver()
+	{
+		FindObjectOfType<AudioManager>().Stop("ingame");
+		GameObject.Find("PlayButton").GetComponent<ButtonControler>().Over = true;
+		GameObject.Find("frame_0_delay-0.17s").GetComponent<Animator>().enabled = false;
+		GameObject.Find("game_over").GetComponent<SpriteRenderer>().enabled = true;
+		GameObject.Find("HomeButton").GetComponentInChildren<CanvasRenderer>().SetAlpha(1);
+		GameObject.Find("RestartButton").GetComponentInChildren<CanvasRenderer>().SetAlpha(1);
+		GameObject.Find("PlayButton").GetComponentInChildren<CanvasRenderer>().SetAlpha(1);
+		GameObject.Find("HomeButton").GetComponent<Button>().interactable = true;
+		GameObject.Find("RestartButton").GetComponent<Button>().interactable = true;
+		GameObject.Find("PlayButton").GetComponent<Button>().interactable = true;
 	}
 }
