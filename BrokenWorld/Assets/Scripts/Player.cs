@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+
 		if (GameObject.Find("PlayButton").GetComponent<ButtonControler>().Paused || GameObject.Find("PlayButton").GetComponent<ButtonControler>().Over)
 		{
 			rigidbody2d.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -41,6 +42,17 @@ public class Player : MonoBehaviour
 			}
 
 		}
+
+        transform.Translate(Vector3.right * Speed * Time.deltaTime);
+
+
+
+        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+        {
+            float jumpVelocity = 4f;
+            rigidbody2d.velocity = Vector2.up * jumpVelocity;
+        }
+
 
     }
 
