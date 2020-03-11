@@ -11,11 +11,30 @@ public class PlatformeGenerator : MonoBehaviour
     private float platformWidth;
     public float DistanceBetweenMin;
     public float DistanceBetweenMax;
+    private int platSelector;
+    public GameObject[] platforms;
+    private float[] platformWidths;
+
+    private float minHeight;
+
+    public Transform maxHeightPoint;
+    private float MaxHeight;
+    public float maxHeightChange;
+    private float heightChange;
+
+
     void Start()
     {
-        platformWidth = Platform.GetComponent<BoxCollider2D>().size.x;
+        //     platformWidth = Platform.GetComponent<BoxCollider2D>().size.x;
+        platformWidths = new float[platforms.Length];
 
-    
+        for (int i = 0; i < platforms.Length; i++)
+        {
+            platformWidths[i] = platforms[i].GetComponent<BoxCollider2D>().size.x;
+        }
+        minHeight = transform.position.y;
+        MaxHeight = maxHeightPoint.position.y;
+
     }
 
     // Update is called once per frame
@@ -25,8 +44,20 @@ public class PlatformeGenerator : MonoBehaviour
         {
             distance = Random.Range(DistanceBetweenMin, DistanceBetweenMax);
 
-            transform.position = new Vector3(transform.position.x + platformWidth + distance, transform.position.y, transform.position.z);
-            Instantiate(Platform, transform.position, transform.rotation);
+
+
+            platSelector = Random.Range(0, platforms.Length);
+            heightChange = transform.position.y + Random.Range(maxHeightChange, -maxHeightChange);
+            if (heightChange > MaxHeight)
+            {
+                heightChange = MaxHeight;
+            }
+            else if (heightChange < minHeight)
+            {
+                heightChange = minHeight;
+            }
+            transform.position = new Vector3(transform.position.x + platformWidths[platSelector] + distance, heightChange, transform.position.z);
+            Instantiate(/*Platform*/ platforms[platSelector], transform.position, transform.rotation);
 
         }
     }
