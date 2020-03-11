@@ -6,8 +6,11 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public Transform platformGenerator;
+    
     private Vector2 PlatformStartPoint;
+    
     public Player ThePlayer;
+    
     private Vector3 playerStartPoint;
     private PlatformDestroy[] platformList;
     void Start()
@@ -32,7 +35,13 @@ public class GameManager : MonoBehaviour
         platformList = FindObjectsOfType<PlatformDestroy>();
         for (int i = 0; i < platformList.Length; i++)
         {
+            if (platformList[i].gameObject.tag == "KillBox")
+            {
+
+            }
+            else { 
             platformList[i].gameObject.SetActive(false);
+            }
         }
         ThePlayer.transform.position = playerStartPoint;
         platformGenerator.position = PlatformStartPoint;
