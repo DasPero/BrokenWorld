@@ -20,18 +20,19 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
+    public float Speed = 5.0f;
+
     void Update()
     {
-     
+        transform.Translate(Vector3.right * Speed * Time.deltaTime);
+        
 
 
         if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
-            float jumpVelocity = 7f;
+            float jumpVelocity = 5f;
             rigidbody2d.velocity = Vector2.up * jumpVelocity;
         }
-
-        if (IsGrounded()) HandleMovement();
 
     }
 
@@ -42,46 +43,7 @@ public class Player : MonoBehaviour
         return raycastHit2d.collider != null;
     }
 
-    private void HandleMovement()
-    {
-        float moveSpeed = 3f;
-        float midAirControl = 115f;
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            if (IsGrounded())
-            {
-                rigidbody2d.velocity = new Vector2(-moveSpeed, rigidbody2d.velocity.y);
-            }
-            else
-            {
-                rigidbody2d.velocity += new Vector2(-moveSpeed*midAirControl , 0);
-                rigidbody2d.velocity = new Vector2(Mathf.Clamp(rigidbody2d.velocity.x, -moveSpeed, +moveSpeed), rigidbody2d.velocity.y);
-            }
-        }
-        else
-        {
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                if (IsGrounded())
-                {
-                    rigidbody2d.velocity = new Vector2(+moveSpeed, rigidbody2d.velocity.y);
-                }
-                else
-                {
-                    
-                    rigidbody2d.velocity += new Vector2(+moveSpeed * midAirControl , 0);
-                    rigidbody2d.velocity = new Vector2(Mathf.Clamp(rigidbody2d.velocity.x, -moveSpeed, +moveSpeed), rigidbody2d.velocity.y);
-                }
-            }
-            else
-            {
-                if (IsGrounded())
-                {
-                    rigidbody2d.velocity = new Vector2(0, rigidbody2d.velocity.y);
-                }
-            }
-        }
-    }
+    
 
 
 
