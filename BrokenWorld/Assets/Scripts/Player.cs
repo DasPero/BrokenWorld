@@ -25,15 +25,22 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.right * Speed * Time.deltaTime);
+		if (GameObject.Find("PlayButton").GetComponent<ButtonControler>().Paused || GameObject.Find("PlayButton").GetComponent<ButtonControler>().Over)
+		{
+			rigidbody2d.constraints = RigidbodyConstraints2D.FreezeAll;
+		}
+		else
+		{
+			rigidbody2d.constraints = RigidbodyConstraints2D.None;
 
+			transform.Translate(Vector3.right * Speed * Time.deltaTime);
+			if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+			{
+				float jumpVelocity = 5f;
+				rigidbody2d.velocity = Vector2.up * jumpVelocity;
+			}
 
-
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
-        {
-            float jumpVelocity = 5f;
-            rigidbody2d.velocity = Vector2.up * jumpVelocity;
-        }
+		}
 
     }
 
@@ -41,7 +48,8 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "kill")
         {
-            TheGameManager.Restart();
+			GameObject.Find("PlayButton").GetComponent<ButtonControler>().GameOver();
+			//TheGameManager.Restart();
         }
     }
 

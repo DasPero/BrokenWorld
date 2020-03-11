@@ -18,11 +18,13 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distanceToMove = ThePlayer.transform.position.x - LastPlayerPosition.x;
+		if (!GameObject.Find("PlayButton").GetComponent<ButtonControler>().Paused && !GameObject.Find("PlayButton").GetComponent<ButtonControler>().Over)
+		{
+			distanceToMove = ThePlayer.transform.position.x - LastPlayerPosition.x;
 
-        transform.position = new Vector3(transform.position.x + distanceToMove,transform.position.y,transform.position.z);
+			transform.position = new Vector3(transform.position.x + distanceToMove, transform.position.y, transform.position.z);
 
-        LastPlayerPosition = ThePlayer.transform.position;
-
+			LastPlayerPosition = ThePlayer.transform.position;
+		}
     }
 }
