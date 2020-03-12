@@ -45,12 +45,11 @@ public class Player : MonoBehaviour
 
 			 transform.Translate(Vector3.right * Speed * Time.deltaTime);
 
-			if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
-			{
-				FindObjectOfType<AudioManager>().PlayOnce("jump");
-				float jumpVelocity = 4f;
-				rigidbody2d.velocity = Vector2.up * jumpVelocity;
-			}
+        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+        {
+            float jumpVelocity = 5f;
+            rigidbody2d.velocity = Vector2.up * jumpVelocity;
+        }
 
 		}
 
