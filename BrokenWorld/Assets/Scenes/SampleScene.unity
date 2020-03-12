@@ -250,7 +250,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 88f5b4015554951449d112f841f4d5d3,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 482a85b5d7ef20b42b3612d240e54623, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 88f5b4015554951449d112f841f4d5d3, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -732,7 +732,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 4f5055e1a216041478de6df8843ce202,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: ff5fc897132a7694585f57f6e0f8f71c, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 4f5055e1a216041478de6df8843ce202, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -978,6 +978,7 @@ Transform:
   - {fileID: 1776609972}
   - {fileID: 1252053294}
   - {fileID: 836829957}
+  - {fileID: 1155318778}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1119,6 +1120,7 @@ MonoBehaviour:
   textFile: {fileID: 4900000, guid: 6d52046b001fc3a4f84db0175293e4c4, type: 3}
   questionCounter: 0
   choosenQuestion: 0
+  score: 0
 --- !u!1 &689221458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1933,6 +1935,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1155318777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1155318778}
+  - component: {fileID: 1155318779}
+  m_Layer: 0
+  m_Name: KeyboardNavigation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1155318778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155318777}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 519420032}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1155318779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155318777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6397714446c2f443b119cd2fb1ce6b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1252053290
 GameObject:
   m_ObjectHideFlags: 0
@@ -2212,7 +2257,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 88f5b4015554951449d112f841f4d5d3,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 482a85b5d7ef20b42b3612d240e54623, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 88f5b4015554951449d112f841f4d5d3, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -2872,7 +2917,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: a261c02e26969cf459e4ae4c55b6f2e9,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 3a740e1ef40889b4ba679d1a0f592cfe, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: a261c02e26969cf459e4ae4c55b6f2e9, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -3076,7 +3121,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 0a0b14b18daf61247818dbd9147cad56,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 080eafbeb5cc8084abea587824b0540d, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 0a0b14b18daf61247818dbd9147cad56, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -3405,7 +3450,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: f98c31d1fccfa2c45bdecacfc13a03e2,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: c870c582054abb64fb97a7874c0bfe4f, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: f98c31d1fccfa2c45bdecacfc13a03e2, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
