@@ -60,6 +60,8 @@ public class QuestionManager : MonoBehaviour
 				{
 					score += 10;
 
+					FindObjectOfType<AudioManager>().Pause("ingame");
+
 					GameObject.Find("PlayButton").GetComponent<ButtonControler>().Paused = true;
 					GameObject.Find("frame_0_delay-0.17s").GetComponent<Animator>().enabled = false;
 

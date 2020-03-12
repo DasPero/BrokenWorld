@@ -224,6 +224,7 @@ public class ButtonControler : MonoBehaviour
 		if (GameObject.Find("Answer1").GetComponent<Button>().interactable)
 		{
 			FindObjectOfType<AudioManager>().PlayOnce("button_click");
+			FindObjectOfType<AudioManager>().Play("ingame");
 
 			string text = GameObject.Find("Answer1Text").GetComponent<Text>().text;
 
@@ -276,6 +277,7 @@ public class ButtonControler : MonoBehaviour
 		if (GameObject.Find("Answer2").GetComponent<Button>().interactable)
 		{
 			FindObjectOfType<AudioManager>().PlayOnce("button_click");
+			FindObjectOfType<AudioManager>().Play("ingame");
 
 			string text = GameObject.Find("Answer2Text").GetComponent<Text>().text;
 

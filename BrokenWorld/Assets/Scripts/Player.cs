@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
 
 			if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
 			{
+				FindObjectOfType<AudioManager>().PlayOnce("jump");
 				float jumpVelocity = 4f;
 				rigidbody2d.velocity = Vector2.up * jumpVelocity;
 			}
@@ -59,8 +60,8 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "kill")
         {
+			FindObjectOfType<AudioManager>().PlayOnce("death");
 			GameObject.Find("PlayButton").GetComponent<ButtonControler>().GameOver();
-			//TheGameManager.Restart();
         }
     }
 
