@@ -28,6 +28,7 @@ public class ButtonControler : MonoBehaviour
 			GameObject.Find("HomeButton").GetComponent<Button>().interactable = false;
 			GameObject.Find("RestartButton").GetComponent<Button>().interactable = false;
 			GameObject.Find("PlayButton").GetComponent<Button>().interactable = false;
+
 		}
 		catch (NullReferenceException e) { }
 
@@ -141,7 +142,7 @@ public class ButtonControler : MonoBehaviour
 
 	public void PauseClick()
 	{
-		if (!GameObject.Find("PlayButton").GetComponent<ButtonControler>().Over)
+		if (!GameObject.Find("PlayButton").GetComponent<ButtonControler>().Over && !GameObject.Find("PlayButton").GetComponent<ButtonControler>().Paused)
 		{
 			FindObjectOfType<AudioManager>().PlayOnce("button_click");
 			FindObjectOfType<AudioManager>().Pause("ingame");
@@ -215,6 +216,112 @@ public class ButtonControler : MonoBehaviour
 				GameObject.Find("PlayButton").GetComponent<ButtonControler>().RestartClick();
 				GameObject.Find("frame_0_delay-0.17s").GetComponent<Animator>().enabled = true;
 			}
+		}
+	}
+
+	public void onAnswer1Click()
+	{
+		if (GameObject.Find("Answer1").GetComponent<Button>().interactable)
+		{
+			FindObjectOfType<AudioManager>().PlayOnce("button_click");
+
+			string text = GameObject.Find("Answer1Text").GetComponent<Text>().text;
+
+			if (GameObject.Find("GameManager").GetComponent<QuestionManager>().question.isRight(text))
+			{
+				int score = int.Parse(GameObject.Find("Score").GetComponent<Text>().text);
+				score += 10;
+				GameObject.Find("GameManager").GetComponent<QuestionManager>().score += 10;
+				GameObject.Find("Score").GetComponent<Text>().text = (score).ToString();
+			}
+			else
+			{
+				int score = int.Parse(GameObject.Find("Score").GetComponent<Text>().text);
+				score -= 10;
+				if (score < 0)
+				{
+					score = 0;
+				}
+				GameObject.Find("Score").GetComponent<Text>().text = (score).ToString();
+			}
+
+			GameObject.Find("question").GetComponent<SpriteRenderer>().enabled = false;
+			GameObject.Find("Answer1").GetComponentInChildren<CanvasRenderer>().SetAlpha(0);
+			GameObject.Find("Answer2").GetComponentInChildren<CanvasRenderer>().SetAlpha(0);
+			GameObject.Find("Answer1").GetComponent<Button>().interactable = false;
+			GameObject.Find("Answer2").GetComponent<Button>().interactable = false;
+
+			GameObject.Find("Answer1Text").GetComponent<Text>().text = "";
+			GameObject.Find("Answer2Text").GetComponent<Text>().text = "";
+			GameObject.Find("QuestionText").GetComponent<Text>().text = "";
+
+			GameObject.Find("frame_0_delay-0.17s").GetComponent<Animator>().enabled = true;
+
+			GameObject.Find("Score").GetComponentInChildren<CanvasRenderer>().SetAlpha(1);
+
+			GameObject.Find("PlayButton").GetComponent<ButtonControler>().Paused = false;
+
+			if (GameObject.Find("GameManager").GetComponent<QuestionManager>().vprasanja.Count == 1)
+			{
+				GameObject.Find("GameManager").GetComponent<QuestionManager>().vprasanja.RemoveAt(0);
+			}
+		}
+	}
+
+	public void onAnswer2Click()
+	{
+		if (GameObject.Find("Answer2").GetComponent<Button>().interactable)
+		{
+			FindObjectOfType<AudioManager>().PlayOnce("button_click");
+
+			string text = GameObject.Find("Answer2Text").GetComponent<Text>().text;
+
+			if (GameObject.Find("GameManager").GetComponent<QuestionManager>().question.isRight(text))
+			{
+				int score = int.Parse(GameObject.Find("Score").GetComponent<Text>().text);
+				score += 10;
+				GameObject.Find("GameManager").GetComponent<QuestionManager>().score += 10;
+				GameObject.Find("Score").GetComponent<Text>().text = (score).ToString();
+			}
+			else
+			{
+				int score = int.Parse(GameObject.Find("Score").GetComponent<Text>().text);
+				score -= 10;
+				if (score < 0)
+				{
+					score = 0;
+				}
+				GameObject.Find("Score").GetComponent<Text>().text = (score).ToString();
+			}
+
+			GameObject.Find("question").GetComponent<SpriteRenderer>().enabled = false;
+			GameObject.Find("Answer1").GetComponentInChildren<CanvasRenderer>().SetAlpha(0);
+			GameObject.Find("Answer2").GetComponentInChildren<CanvasRenderer>().SetAlpha(0);
+			GameObject.Find("Answer1").GetComponent<Button>().interactable = false;
+			GameObject.Find("Answer2").GetComponent<Button>().interactable = false;
+
+			GameObject.Find("Answer1Text").GetComponent<Text>().text = "";
+			GameObject.Find("Answer2Text").GetComponent<Text>().text = "";
+			GameObject.Find("QuestionText").GetComponent<Text>().text = "";
+
+			GameObject.Find("frame_0_delay-0.17s").GetComponent<Animator>().enabled = true;
+
+			GameObject.Find("Score").GetComponentInChildren<CanvasRenderer>().SetAlpha(1);
+
+			GameObject.Find("PlayButton").GetComponent<ButtonControler>().Paused = false;
+
+			if(GameObject.Find("GameManager").GetComponent<QuestionManager>().vprasanja.Count == 1)
+			{
+				GameObject.Find("GameManager").GetComponent<QuestionManager>().vprasanja.RemoveAt(0);
+			}
+		}
+	}
+
+	public void AnswerHover()
+	{
+		if (GameObject.Find("Answer1").GetComponent<Button>().interactable)
+		{
+			FindObjectOfType<AudioManager>().PlayOnce("button_hover");
 		}
 	}
 
