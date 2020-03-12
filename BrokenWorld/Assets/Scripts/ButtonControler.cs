@@ -238,6 +238,9 @@ public class ButtonControler : MonoBehaviour
 			{
 				int score = int.Parse(GameObject.Find("Score").GetComponent<Text>().text);
 				score -= 10;
+
+				GameObject.Find("Player").GetComponent<Player>().Speed += 1;
+
 				if (score < 0)
 				{
 					score = 0;
@@ -286,6 +289,9 @@ public class ButtonControler : MonoBehaviour
 			else
 			{
 				int score = int.Parse(GameObject.Find("Score").GetComponent<Text>().text);
+
+				GameObject.Find("Player").GetComponent<Player>().Speed += 1;
+
 				score -= 10;
 				if (score < 0)
 				{
