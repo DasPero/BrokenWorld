@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
 		else
 		{
 			rigidbody2d.constraints = RigidbodyConstraints2D.None;
+			rigidbody2d.constraints = RigidbodyConstraints2D.FreezeRotation;
 
 			transform.Translate(Vector3.right * Speed * Time.deltaTime);
 			if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
@@ -40,8 +41,6 @@ public class Player : MonoBehaviour
 				float jumpVelocity = 5f;
 				rigidbody2d.velocity = Vector2.up * jumpVelocity;
 			}
-
-		}
 
         transform.Translate(Vector3.right * Speed * Time.deltaTime);
 
@@ -53,8 +52,9 @@ public class Player : MonoBehaviour
             rigidbody2d.velocity = Vector2.up * jumpVelocity;
         }
 
+		}
 
-    }
+	}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
