@@ -149,6 +149,12 @@ public class AudioManager : MonoBehaviour
 
 		s = Array.Find(sounds, sound => sound.name == "button_hover");
 		s.source.volume = value;
+
+		s = Array.Find(sounds, sound => sound.name == "jump");
+		s.source.volume = value;
+
+		s = Array.Find(sounds, sound => sound.name == "death");
+		s.source.volume = value;
 	}
 
 	public float GetMusicVolume()

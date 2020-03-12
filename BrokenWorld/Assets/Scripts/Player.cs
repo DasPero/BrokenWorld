@@ -59,8 +59,8 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "kill")
         {
+			FindObjectOfType<AudioManager>().PlayOnce("death");
 			GameObject.Find("PlayButton").GetComponent<ButtonControler>().GameOver();
-			//TheGameManager.Restart();
         }
     }
 
