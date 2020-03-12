@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
 
         if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
-            float jumpVelocity = 4f;
+            float jumpVelocity = 5f;
             rigidbody2d.velocity = Vector2.up * jumpVelocity;
         }
 

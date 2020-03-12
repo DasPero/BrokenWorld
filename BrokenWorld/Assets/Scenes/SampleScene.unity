@@ -996,7 +996,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2304
   TheGameManager: {fileID: 653496168}
-  Speed: 5
+  Speed: 3
 --- !u!95 &689221463
 Animator:
   serializedVersion: 3
