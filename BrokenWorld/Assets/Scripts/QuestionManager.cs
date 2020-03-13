@@ -74,7 +74,7 @@ public class QuestionManager : MonoBehaviour
 					GameObject.Find("Score").GetComponentInChildren<CanvasRenderer>().SetAlpha(0);
 
 					System.Random rnd = new System.Random();
-					GetComponent<QuestionManager>().choosenQuestion = rnd.Next(vprasanja.Count - 1);
+					GetComponent<QuestionManager>().choosenQuestion = rnd.Next(vprasanja.Count);
 
 					question = new Question(vprasanja[choosenQuestion]);
 
