@@ -8,6 +8,7 @@ TagManager:
   - KillBox
   - kill
   - destroyer
+  - Enemy
   layers:
   - Default
   - TransparentFX

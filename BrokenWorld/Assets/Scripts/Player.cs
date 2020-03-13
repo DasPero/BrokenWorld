@@ -61,6 +61,28 @@ public class Player : MonoBehaviour
         {
 			FindObjectOfType<AudioManager>().PlayOnce("death");
 			GameObject.Find("PlayButton").GetComponent<ButtonControler>().GameOver();
+        }else if(collision.gameObject.tag == "Enemy")
+        {
+             Enemy enemy = collision.collider.GetComponent<Enemy>();
+            if(enemy != null)
+            {
+                foreach (ContactPoint2D point in collision.contacts)
+                {
+                    if (point.normal.y >= 0.9f)
+                    {
+                        enemy.Hurt();
+                        float jumpVelocity = 5f;
+                        rigidbody2d.velocity = Vector2.up * jumpVelocity;
+                    }
+                    else
+                    {
+                        FindObjectOfType<AudioManager>().PlayOnce("death");
+                        GameObject.Find("PlayButton").GetComponent<ButtonControler>().GameOver();
+                    }
+                }
+            }
+
+
         }
     }
 

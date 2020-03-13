@@ -12,7 +12,9 @@ public class PlatformeGenerator : MonoBehaviour
     public float DistanceBetweenMin;
     public float DistanceBetweenMax;
     private int platSelector;
+    private int enemySelector;
     public GameObject[] platforms;
+    public GameObject[] enemys;
     private float[] platformWidths;
 
     private float minHeight;
@@ -22,6 +24,7 @@ public class PlatformeGenerator : MonoBehaviour
     public float maxHeightChange;
     private float heightChange;
 
+    private float position_X_enemy;
 
     void Start()
     {
@@ -47,6 +50,7 @@ public class PlatformeGenerator : MonoBehaviour
 
 
             platSelector = Random.Range(0, platforms.Length);
+            enemySelector = Random.Range(0, enemys.Length);
             heightChange = transform.position.y + Random.Range(maxHeightChange, -maxHeightChange);
             if (heightChange > MaxHeight)
             {
@@ -59,6 +63,21 @@ public class PlatformeGenerator : MonoBehaviour
             transform.position = new Vector3(transform.position.x + platformWidths[platSelector] + distance, heightChange, transform.position.z);
             Instantiate(/*Platform*/ platforms[platSelector], transform.position, transform.rotation);
 
+            position_X_enemy = Random.Range(-1.2f, 1.2f);
+            if(enemySelector == 1)
+            {
+                transform.position = new Vector3(transform.position.x + position_X_enemy, transform.position.y + 0.6f, transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x + position_X_enemy, transform.position.y + 0.8f, transform.position.z);
+            }
+
+
+            if (platSelector!=1 && platSelector!=2)
+            {
+                Instantiate(enemys[enemySelector], transform.position, transform.rotation);
+            }
         }
     }
 }
