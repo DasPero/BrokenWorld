@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
 
 			if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
 			{
+				FindObjectOfType<AudioManager>().PlayOnce("jump");
 				float jumpVelocity = 5f;
 				rigidbody2d.velocity = Vector2.up * jumpVelocity;
 			}
@@ -70,7 +71,8 @@ public class Player : MonoBehaviour
                 {
                     if (point.normal.y >= 0.9f)
                     {
-                        enemy.Hurt();
+						FindObjectOfType<AudioManager>().PlayOnce("jump");
+						enemy.Hurt();
                         float jumpVelocity = 5f;
                         rigidbody2d.velocity = Vector2.up * jumpVelocity;
                     }
